@@ -1,0 +1,36 @@
+pipeline {
+    agent any
+    
+    environment {
+        maven = 'default'
+    }
+    
+    stages {
+        
+        stage('Initialize') {
+            steps {
+                echo '# starting the pipeline execution...'
+            }
+        }
+        
+        stage('Build release') {
+            steps {
+                echo '# building the application...'
+                bat "mvn -B -DskipTests clean install"
+            }
+        }
+        
+        stage('Run test plan') {
+            steps {
+                echo '# teting the application...'
+                bat 'mvn clean test -DtestSuite=./src/test/java/%Test_suite% -DappUrl=%AppUrl% -Dbrowser=%Browser% -Drelease=V1.0 -Denv=%Environment%'
+            }
+        }
+    }
+    
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}

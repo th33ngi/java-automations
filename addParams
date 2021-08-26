@@ -1,0 +1,28 @@
+pipeline {
+    agent any
+    
+    parameters {
+        choice(name: 'Platform', choices: ['windows', 'linux', 'mac'], description: 'select a platform or an agent')
+        choice(name: 'Environment', choices: ['qe', 'uat', 'prod'], description: 'select an environment')
+        choice(name: 'Browser', choices: ['chrome', 'firefox'], description: 'select a browser')
+        choice(name: 'Repository', choices: ['https://github.com/th33ngi/java-maven-automation.git'], description: 'select a repository')
+        choice(name: 'Branch', choices: ['main', 'dev'], description: 'select a branch')
+        choice(name: 'TestSuite', choices: ['testng.xml', 'smoke.xml', 'regression.xml'], description: 'select a test cases suite')
+        choice(name: 'TestsSuitePath', choices: ['./src/test/java/'], description: 'select a test suite path')
+        choice(name: 'AppUrl', choices: ['https://www.google.com/', 'https://www.focusservices.com/', 'https://www.lifesize.com/'], description: 'select an url app')
+        choice(name: 'Version', choices: ['v0.0.1', 'v0.0.2', 'v0.0.3'], description: 'select an app version')
+    }
+    
+    stages {        
+        stage('check params') {
+            steps {
+                echo '# checking all parameters were created successfully...'
+                echo '# loading required parameters...'
+                echo " -- platform: ${params.Platform}, environment: ${params.Environment}, browser: ${params.Browser}" 
+                echo " -- repository: ${params.Repository}, branch: ${params.Branch}"
+                echo " -- test suite: ${params.TestSuite}, test suite path: ${params.TestsSuitePath}"
+                echo " -- web app to be tested: ${params.AppUrl}, version: ${params.Version}"
+            }
+        }
+    }
+}
