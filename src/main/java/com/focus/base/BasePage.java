@@ -29,14 +29,14 @@ public class BasePage extends Page {
 
 	// start the web driver
 	public WebDriver initDriver(Properties prop) {
-		String browserName = prop.getProperty("browser");
-		String osName = prop.getProperty("os");
+		String browserName = prop.getProperty("chrome");
+		String osName = prop.getProperty("windows");
 		if (browserName.equals("chrome")) {
-			if (osName.equals("win")) {
+			if (osName.equals("windows")) {
 				optionsManager = new OptionsManager(prop);
 				System.setProperty("webdriver.chrome.driver", prop.getProperty("driver")+"/chromedriver.exe");
 				driver = new ChromeDriver(optionsManager.getChromeOptions());
-			} else {
+			} else if(osName.equals("linux")) {
 				optionsManager = new OptionsManager(prop);
 				System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
 				driver = new ChromeDriver(optionsManager.getChromeOptions());
