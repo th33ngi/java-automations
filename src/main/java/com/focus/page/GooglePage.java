@@ -21,7 +21,8 @@ public class GooglePage extends BasePage{
 	//Page locator
 	By inputName = By.name("q");
 	By aTagName = By.tagName("a");
-	By span = By.xpath("//h2/span[contains(text(),'Focus Services LLC.')]");
+	//By span = By.xpath("//h2/span[contains(text(),'Focus Services LLC.')]");
+	By span = By.cssSelector("#_KTwoYfO-IM-GwbkPtfqC6Ak68 > div.d7sCQ.kp-header > div.fYOrjf.kp-hc > div.Hhmu2e.wDYxhc.NFQFxe.viOShc.LKPcQc > div > div > h2 > span");
 	
 	public String getGooglePageTitle() {
 		return webElement.getPageTitle();
