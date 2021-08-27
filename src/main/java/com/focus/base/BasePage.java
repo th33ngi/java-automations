@@ -29,22 +29,50 @@ public class BasePage extends Page {
 
 	// start the web driver
 	public WebDriver initDriver(Properties prop) {
-		String browserName = prop.getProperty("chrome");
-		String osName = prop.getProperty("windows");
-		if (browserName.equals("chrome")) {
-			if (osName.equals("windows")) {
+		String platformName = prop.getProperty("platform");
+		String browserName = prop.getProperty("browser");
+		if (platformName.equals("windows")) {
+			if (browserName.equals("chrome")) {
 				optionsManager = new OptionsManager(prop);
 				System.setProperty("webdriver.chrome.driver", prop.getProperty("driver")+"/chromedriver.exe");
 				driver = new ChromeDriver(optionsManager.getChromeOptions());
-			} else if(osName.equals("linux")) {
+			} else if (browserName.equals("firefox")) {
+				optionsManager = new OptionsManager(prop);
+				System.setProperty("webdriver.gecko.driver", prop.getProperty("driver")+"/geckodriver.exe");
+				driver = new FirefoxDriver(optionsManager.getFirefoxOptions());
+			} else {
+				optionsManager = new OptionsManager(prop);
+				System.setProperty("webdriver.ie.driver", prop.getProperty("driver")+"/IEDriverServer.exe");
+				driver = new FirefoxDriver(optionsManager.getFirefoxOptions());
+			}
+		} else if (platformName.equals("linux")) {
+			if (browserName.equals("chrome")) {
 				optionsManager = new OptionsManager(prop);
 				System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
 				driver = new ChromeDriver(optionsManager.getChromeOptions());
+			} else if (browserName.equals("firefox")) {
+				optionsManager = new OptionsManager(prop);
+				System.setProperty("webdriver.chrome.driver", "/usr/local/bin/geckodriver");
+				driver = new ChromeDriver(optionsManager.getChromeOptions());
+			} else {
+				optionsManager = new OptionsManager(prop);
+				System.setProperty("webdriver.ie.driver", prop.getProperty("driver")+"/IEDriverServer");
+				driver = new FirefoxDriver(optionsManager.getFirefoxOptions());
 			}
 		} else {
-			optionsManager = new OptionsManager(prop);
-			System.setProperty("webdriver.gecko.driver", prop.getProperty("driver")+"/geckodriver.exe");
-			driver = new FirefoxDriver(optionsManager.getFirefoxOptions());
+			if (browserName.equals("chrome")) {
+				optionsManager = new OptionsManager(prop);
+				System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
+				driver = new ChromeDriver(optionsManager.getChromeOptions());
+			} else if (browserName.equals("firefox")) {
+				optionsManager = new OptionsManager(prop);
+				System.setProperty("webdriver.chrome.driver", "/usr/local/bin/geckodriver");
+				driver = new ChromeDriver(optionsManager.getChromeOptions());
+			} else {
+				optionsManager = new OptionsManager(prop);
+				System.setProperty("webdriver.ie.driver", prop.getProperty("driver")+"/IEDriverServer");
+				driver = new FirefoxDriver(optionsManager.getFirefoxOptions());
+			}
 		}
 
 		eventDriver = new EventFiringWebDriver(driver);

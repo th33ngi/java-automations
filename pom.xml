@@ -51,10 +51,11 @@
 				<version>3.0.0-M3</version>
 				<configuration>
 					<systemPropertyVariables>
-						<AppUrlValue>${appUrl}}</AppUrlValue>
+						<PlatformName>${platform}}</PlatformName>
 						<BrowserName>${browser}}</BrowserName>
-						<ReleaseName>${release}}</ReleaseName>
 						<EnvironmentName>${env}}</EnvironmentName>
+						<AppUrlValue>${appUrl}}</AppUrlValue>
+						<ReleaseName>${release}}</ReleaseName>
 					</systemPropertyVariables>
 					<suiteXmlFiles>
 						<file>${testSuite}</file>
