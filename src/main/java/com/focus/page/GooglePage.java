@@ -22,7 +22,7 @@ public class GooglePage extends BasePage{
 	By inputName = By.name("q");
 	By aTagName = By.tagName("a");
 	//By span = By.xpath("//h2/span[contains(text(),'Focus Services LLC.')]");
-	By span = By.xpath("//*[@id='_KTwoYfO-IM-GwbkPtfqC6Ak68']//h2/span[contains(text(),'Focus Services LLC.')]");
+	By span = By.xpath("//*[@id=\"rso\"]//h3[contains(text(),'Focus Services – Beyond Expectations')]");
 	
 	public String getGooglePageTitle() {
 		return webElement.getPageTitle();
@@ -45,7 +45,7 @@ public class GooglePage extends BasePage{
 	}
 	
 	public Boolean isFocusServicesLLC() {
-		webElement.waitVisibilityOfElement(span, 60, 10);
+		//webElement.waitVisibilityOfElement(span, 60, 10);
 		return	webElement.isDisplayed(span);
 	}
 }
