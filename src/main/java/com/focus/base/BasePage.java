@@ -83,7 +83,7 @@ public class BasePage extends Page {
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		driver.get(prop.getProperty("appUrl"));
+		driver.get(prop.getProperty("appurl"));
 		return driver;
 	}
 
